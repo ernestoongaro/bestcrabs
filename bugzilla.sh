@@ -7,10 +7,19 @@ web_user=www-data
 
 function configweb {
 	lighttpd-enable-mod cgi
- 	echo  "
+ 	echo  '
         cgi.assign      = (
-        \".pl\"  => \"/usr/bin/perl\",
-        )" >> /etc/lighttpd/conf-enabled/10-cgi.conf
+        ".pl"  => "/usr/bin/perl",
+        )
+	
+	$HTTP["url"] =~ "^/bugzilla/.*" {
+    	# disable directory listings
+    	dir-listing.activate = "disable"
+    	# only allow cgis in this directory
+        cgi.assign = ( ".cgi" => "" )
+    	index-file.names   = ( "index.cgi" )
+
+' >> /etc/lighttpd/conf-enabled/10-cgi.conf
 	/etc/init.d/lighttpd reload
 }
 
