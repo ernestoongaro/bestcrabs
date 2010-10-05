@@ -39,6 +39,7 @@ if lighttpd -v; then
 else
 	echo "You do not appear to be running a web server"
 	apt-get install lighttpd
+	configweb
 fi
 
 #check for mysql server
