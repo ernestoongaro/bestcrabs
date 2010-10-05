@@ -7,10 +7,10 @@ web_user=www-data
 
 function configweb {
 	lighttpd-enable-mod cgi
-	echo  "				
-	cgi.assign      = (		  
-	".pl"  => "/usr/bin/perl",      
-	)" >> /etc/lighttpd/conf-enabled/10-cgi.conf
+ 	echo  "
+        cgi.assign      = (
+        \".pl\"  => \"/usr/bin/perl\",
+        )" >> /etc/lighttpd/conf-enabled/10-cgi.conf
 	/etc/init.d/lighttpd reload
 }
 
@@ -94,7 +94,7 @@ mysql -u root -p -e "GRANT ALL ON $dbs_name.* TO $dbs_user@localhost IDENTIFIED 
 echo "  \$db_name = '$dbs_name';
         \$db_user = '$dbs_user';
         \$db_pass = '$dbs_pass';
-        \$web_user = '$webservergroup';
+        \$webservergroup = '$web_user';
         \$db_port = '3306';" > /var/www/bugzilla/localconfig
 
 #Finally run the Bugzilla Setup
